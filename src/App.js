@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import $ from 'jquery'
 import moment from 'moment-timezone'
 import ReactGA from 'react-ga'
 
@@ -220,7 +219,7 @@ var Canvas = {
     this.h = this.canvas.height
   },
   initialize: function() {
-    this.canvas = $('#canvas')[0]
+    this.canvas = document.getElementById('canvas')
 
     if (!this.canvas.getContext) return
 
