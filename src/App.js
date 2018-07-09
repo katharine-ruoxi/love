@@ -92,7 +92,7 @@ var Canvas = {
       moment().diff(moment.tz('2014-06-13 00:00', 'America/New_York'))
     )
     this.ctx.textAlign = 'start'
-    this.ctx.font = `bold ${this.fontSize}px sans-serif`
+    this.ctx.font = `800 ${this.fontSize}px "Exo 2", sans-serif`
     this.setStyle(1)
     this.fillText('KATHARINE,', 0, -this.fontSize * 4)
     this.setStyle(2)
