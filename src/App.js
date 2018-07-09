@@ -17,9 +17,11 @@ var Canvas = {
   fontSize: 30,
   fpsLimit: 30,
   then: Date.now(),
-  bps: 1, // heart beats per second
+  beatsPerSecond: 1,
   beatMinScale: 0.8,
   beatMaxScale: 1.1,
+  ellipsisOffset: 0,
+  textsShown: false,
   update: function() {
     var now = Date.now()
     var elapsed = now - this.then
@@ -52,7 +54,7 @@ var Canvas = {
   },
   drawRedHeart: function() {
     var ms = moment().milliseconds()
-    var beatTime = Math.floor(500 / this.bps)
+    var beatTime = Math.floor(500 / this.beatsPerSecond)
     var scale =
       Math.floor(ms / beatTime) % 2
         ? this.beatMinScale +
@@ -143,8 +145,26 @@ var Canvas = {
       this.fontSize * 3,
       this.counts(duration.seconds(), 'SECOND')
     )
-    this.setStyle(8)
-    this.fillText('......', 0, this.fontSize * 4)
+    this.ctx.fillStyle = 'white'
+    // ellipsis animation
+    if (this.textsShown) {
+      this.fillText(
+        Array(((duration.seconds() - this.ellipsisOffset) % 6) + 1)
+          .fill('·')
+          .join(''),
+        0,
+        this.fontSize * 4,
+        '······'
+      )
+    } else {
+      // check if all texts are shown on the canvas
+      var alpha = this.getAlpha(7)
+      if (alpha === 1 && duration.milliseconds() < 100) {
+        this.textsShown = true
+        // make sure only one dot is shown at first
+        this.ellipsisOffset = (duration.seconds() % 6) - 6
+      }
+    }
   },
   fillText: function(text, offsetWidth, offsetHeight, fullText) {
     this.ctx.fillText(
@@ -157,12 +177,15 @@ var Canvas = {
     )
   },
   setStyle: function(idx) {
-    var alpha = Math.max(Math.min(this.alpha / 100 - idx, 1), 0)
+    var alpha = this.getAlpha(idx)
     this.ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
   },
   setNumberStyle: function(idx) {
-    var alpha = Math.max(Math.min(this.alpha / 100 - idx, 1), 0)
+    var alpha = this.getAlpha(idx)
     this.ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`
+  },
+  getAlpha: function(idx) {
+    return Math.max(Math.min(this.alpha / 100 - idx, 1), 0)
   },
   counts: function(value, unit, returnValue = true) {
     if (returnValue)
