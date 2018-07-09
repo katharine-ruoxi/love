@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import $ from 'jquery'
 import moment from 'moment-timezone'
+import ReactGA from 'react-ga'
 
 var Canvas = {
   heartHeight: 60,
@@ -252,6 +253,9 @@ var Canvas = {
 // inspired by https://codepen.io/bferioli/pen/qEGaPp
 class App extends Component {
   componentDidMount() {
+    // Google Analytics
+    ReactGA.initialize('UA-121978101-1')
+    ReactGA.pageview(window.location.pathname + window.location.search)
     Canvas.initialize()
   }
 
