@@ -79,48 +79,90 @@ var Canvas = {
     var duration = moment.duration(
       moment().diff(moment.tz('2014-06-13 00:00', 'America/New_York'))
     )
-    this.ctx.textAlign = 'center'
+    this.ctx.textAlign = 'start'
     this.ctx.font = `bold ${this.fontSize}px sans-serif`
     this.setStyle(1)
-    this.ctx.fillText('KATHARINE,', this.w / 2, this.h / 2 - this.fontSize * 4)
+    this.fillText('KATHARINE,', 0, -this.fontSize * 4)
     this.setStyle(2)
-    this.ctx.fillText(
-      "I'VE FALLEN IN",
-      this.w / 2,
-      this.h / 2 - this.fontSize * 3
-    )
+    this.fillText("I'VE FALLEN IN", 0, -this.fontSize * 3)
     this.setStyle(3)
-    this.ctx.fillText('WITH YOU FOR', this.w / 2, this.h / 2 - this.fontSize)
+    this.fillText('WITH YOU FOR', 0, -this.fontSize)
     this.setStyle(4)
-    this.ctx.fillText(
-      `${Math.floor(duration.asDays())} DAYS`,
-      this.w / 2,
-      this.h / 2
+    this.fillText(
+      'DAYS',
+      this.ctx.measureText(`${Math.floor(duration.asDays())} `).width,
+      0,
+      `${Math.floor(duration.asDays())} DAYS`
+    )
+    this.setNumberStyle(4)
+    this.fillText(
+      `${Math.floor(duration.asDays())}`,
+      0,
+      0,
+      `${Math.floor(duration.asDays())} DAYS`
     )
     this.setStyle(5)
-    this.ctx.fillText(
-      `${duration.hours()} HOURS`,
-      this.w / 2,
-      this.h / 2 + this.fontSize
+    this.fillText(
+      'HOURS',
+      this.ctx.measureText(`${duration.hours()} `).width,
+      this.fontSize,
+      `${duration.hours()} HOURS`
+    )
+    this.setNumberStyle(5)
+    this.fillText(
+      `${duration.hours()}`,
+      0,
+      this.fontSize,
+      `${duration.hours()} HOURS`
     )
     this.setStyle(6)
-    this.ctx.fillText(
-      `${duration.minutes()} MINUTES`,
-      this.w / 2,
-      this.h / 2 + this.fontSize * 2
+    this.fillText(
+      'MINUTES',
+      this.ctx.measureText(`${duration.minutes()} `).width,
+      this.fontSize * 2,
+      `${duration.minutes()} MINUTES`
+    )
+    this.setNumberStyle(6)
+    this.fillText(
+      `${duration.minutes()}`,
+      0,
+      this.fontSize * 2,
+      `${duration.minutes()} MINUTES`
     )
     this.setStyle(7)
-    this.ctx.fillText(
-      `${duration.seconds()} SECONDS`,
-      this.w / 2,
-      this.h / 2 + this.fontSize * 3
+    this.fillText(
+      'SECONDS',
+      this.ctx.measureText(`${duration.seconds()} `).width,
+      this.fontSize * 3,
+      `${duration.seconds()} SECONDS`
+    )
+    this.setNumberStyle(7)
+    this.fillText(
+      `${duration.seconds()}`,
+      0,
+      this.fontSize * 3,
+      `${duration.seconds()} SECONDS`
     )
     this.setStyle(8)
-    this.ctx.fillText('......', this.w / 2, this.h / 2 + this.fontSize * 4)
+    this.fillText('......', 0, this.fontSize * 4)
+  },
+  fillText: function(text, offsetWidth, offsetHeight, fullText) {
+    this.ctx.fillText(
+      text,
+      (this.w -
+        this.ctx.measureText(fullText !== undefined ? fullText : text).width) /
+        2 +
+        offsetWidth,
+      this.h / 2 + offsetHeight
+    )
   },
   setStyle: function(idx) {
     var alpha = Math.max(Math.min(this.alpha / 100 - idx, 1), 0)
     this.ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
+  },
+  setNumberStyle: function(idx) {
+    var alpha = Math.max(Math.min(this.alpha / 100 - idx, 1), 0)
+    this.ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`
   },
   move: function() {
     for (var b = 0; b < this.hearts.length; b++) {
