@@ -103,45 +103,45 @@ var Canvas = {
     )
     this.setStyle(5)
     this.fillText(
-      'HOURS',
+      this.counts(duration.hours(), 'HOUR', false),
       this.ctx.measureText(`${duration.hours()} `).width,
       this.fontSize,
-      `${duration.hours()} HOURS`
+      this.counts(duration.hours(), 'HOUR')
     )
     this.setNumberStyle(5)
     this.fillText(
       `${duration.hours()}`,
       0,
       this.fontSize,
-      `${duration.hours()} HOURS`
+      this.counts(duration.hours(), 'HOUR')
     )
     this.setStyle(6)
     this.fillText(
-      'MINUTES',
+      this.counts(duration.minutes(), 'MINUTE', false),
       this.ctx.measureText(`${duration.minutes()} `).width,
       this.fontSize * 2,
-      `${duration.minutes()} MINUTES`
+      this.counts(duration.minutes(), 'MINUTE')
     )
     this.setNumberStyle(6)
     this.fillText(
       `${duration.minutes()}`,
       0,
       this.fontSize * 2,
-      `${duration.minutes()} MINUTES`
+      this.counts(duration.minutes(), 'MINUTE')
     )
     this.setStyle(7)
     this.fillText(
-      'SECONDS',
+      this.counts(duration.seconds(), 'SECOND', false),
       this.ctx.measureText(`${duration.seconds()} `).width,
       this.fontSize * 3,
-      `${duration.seconds()} SECONDS`
+      this.counts(duration.seconds(), 'SECOND')
     )
     this.setNumberStyle(7)
     this.fillText(
       `${duration.seconds()}`,
       0,
       this.fontSize * 3,
-      `${duration.seconds()} SECONDS`
+      this.counts(duration.seconds(), 'SECOND')
     )
     this.setStyle(8)
     this.fillText('......', 0, this.fontSize * 4)
@@ -163,6 +163,11 @@ var Canvas = {
   setNumberStyle: function(idx) {
     var alpha = Math.max(Math.min(this.alpha / 100 - idx, 1), 0)
     this.ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`
+  },
+  counts: function(value, unit, returnValue = true) {
+    if (returnValue)
+      return value === 1 ? `${value} ${unit}` : `${value} ${unit}S`
+    else return value === 1 ? unit : `${unit}S`
   },
   move: function() {
     for (var b = 0; b < this.hearts.length; b++) {
