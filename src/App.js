@@ -17,6 +17,9 @@ var Canvas = {
   fontSize: 30,
   fpsLimit: 30,
   then: Date.now(),
+  bps: 1, // heart beats per second
+  beatMinScale: 0.8,
+  beatMaxScale: 1.1,
   update: function() {
     var now = Date.now()
     var elapsed = now - this.then
@@ -48,15 +51,26 @@ var Canvas = {
     this.move()
   },
   drawRedHeart: function() {
+    var ms = moment().milliseconds()
+    var beatTime = Math.floor(500 / this.bps)
+    var scale =
+      Math.floor(ms / beatTime) % 2
+        ? this.beatMinScale +
+          ((ms % beatTime) / beatTime) * (this.beatMaxScale - this.beatMinScale)
+        : this.beatMinScale +
+          (1 - (ms % beatTime) / beatTime) *
+            (this.beatMaxScale - this.beatMinScale)
     this.ctx.globalAlpha = 1.0
     this.redHeart.width = this.fontSize
     this.redHeart.height = this.fontSize
     this.ctx.drawImage(
       this.redHeart,
-      (this.w - this.redHeart.width) / 2,
-      this.h / 2 - this.redHeart.height * 0.9 - this.fontSize * 2,
-      this.redHeart.width,
-      this.redHeart.height
+      (this.w - this.redHeart.width * scale) / 2,
+      (this.h - this.redHeart.height * scale) / 2 -
+        this.redHeart.height * 0.4 -
+        this.fontSize * 2,
+      this.redHeart.width * scale,
+      this.redHeart.height * scale
     )
   },
   drawText: function() {
