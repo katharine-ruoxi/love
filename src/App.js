@@ -10,18 +10,21 @@ var Canvas = {
   redHeart: null,
   heartImage: `${process.env.PUBLIC_URL}/heart.png`,
   redHeartImage: `${process.env.PUBLIC_URL}/redheart.png`,
-  maxHearts: 8,
+  numHearts: 8, // number of hearts shown on canvas
   minScale: 0.4,
+  minHearts: 6, // min number of hearts
+  maxHearts: 25, // max number of hearts
+  pixelsPerHeart: 35000, // control the density of hearts
   alpha: 0,
-  alphaIncrease: 3,
+  alphaIncrease: 3, // control text fad in speed
   fontSize: 30,
-  fpsLimit: 30,
+  fpsLimit: 30, // frame rate limit
   then: Date.now(),
-  beatsPerSecond: 1,
+  beatsPerSecond: 1, // red heartbeats per second
   beatMinScale: 0.8,
   beatMaxScale: 1.1,
-  ellipsisOffset: 0,
-  textsShown: false,
+  ellipsisOffset: 0, // to make sure one dot of the ellipsis is shown at first
+  textsShown: false, // if all texts on the canvas are visible
   update: function() {
     var now = Date.now()
     var elapsed = now - this.then
@@ -34,9 +37,16 @@ var Canvas = {
   },
   draw: function() {
     this.setCanvasSize()
+    this.numHearts = Math.min(
+      Math.max(
+        Math.round((this.w * this.h) / this.pixelsPerHeart),
+        this.minHearts
+      ),
+      this.maxHearts
+    )
     this.fontSize = Math.min(Math.floor(this.h / 10), 30)
     this.ctx.clearRect(0, 0, this.w, this.h)
-    for (var i = 0; i < this.hearts.length; i++) {
+    for (var i = 0; i < this.numHearts; i++) {
       var heart = this.hearts[i]
       heart.image.style.height = heart.height
       this.ctx.globalAlpha = heart.opacity
