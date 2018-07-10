@@ -11,12 +11,12 @@ var Canvas = {
   heartImage: `${process.env.PUBLIC_URL}/heart.png`,
   redHeartImage: `${process.env.PUBLIC_URL}/redheart.png`,
   numHearts: 8, // number of hearts shown on canvas
-  minScale: 0.4,
+  minScale: 0.25,
   minHearts: 6, // min number of hearts
   maxHearts: 25, // max number of hearts
   pixelsPerHeart: 35000, // control the density of hearts
   alpha: 0,
-  alphaIncrease: 3, // control text fad in speed
+  alphaIncrease: 3, // control text fade in speed
   fontSize: 30,
   fpsLimit: 30, // frame rate limit
   then: Date.now(),
@@ -234,7 +234,7 @@ var Canvas = {
         ys: Math.random() + 1,
         height: scale * this.heartHeight,
         width: scale * this.heartWidth,
-        opacity: scale,
+        opacity: Math.random() * (1 - this.minScale) + this.minScale,
         image: new Image()
       })
       this.hearts[a].image.src = this.heartImage
