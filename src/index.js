@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import WebFont from 'webfontloader'
+import { BrowserRouter } from 'react-router-dom'
 
 WebFont.load({
   google: {
@@ -11,4 +12,9 @@ WebFont.load({
   timeout: 2000
 })
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root')
+)
