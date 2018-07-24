@@ -271,6 +271,11 @@ class LoveCanvas extends Component {
         params: { name, year, month, date }
       }
     } = this.props
+
+    // change title
+    document.title = `To My ${name}`
+
+    // set up canvas
     Canvas.initialize(name, year, month, date)
   }
 
