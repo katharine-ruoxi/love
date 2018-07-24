@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - node
+
+branches:
+  only:
+    - master
+
+script:
+  - yarn run build
+  - yarn run deploy-travis
+
+notifications:
+  email: false

@@ -14,6 +14,7 @@
   "scripts": {
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
+    "deploy-travis": "./node_modules/.bin/gh-pages -d build -r https://$GITHUB_TOKEN@github.com/stevenliuyi/love.git",
     "start": "react-scripts start",
     "build": "PUBLIC_URL=/love react-scripts build",
     "test": "react-scripts test --env=jsdom",
