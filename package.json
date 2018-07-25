@@ -1,7 +1,8 @@
 {
   "name": "love",
   "version": "0.1.0",
-  "private": true,
+  "author": "Steven Liu",
+  "homepage": "https://fallingloves.com",
   "dependencies": {
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
