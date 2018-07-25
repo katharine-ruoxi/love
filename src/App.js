@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import LoveCanvas from './LoveCanvas'
+import About from './About'
 import './App.css'
 import { Switch, Route } from 'react-router-dom'
 import ReactGA from 'react-ga'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +18,7 @@ class App extends Component {
     return (
       <Switch>
         <Route path="/:name/:year/:month/:date" component={LoveCanvas} />
+        <Route exact path="/about" component={About} />
         <Route
           path="/"
           render={() => (
