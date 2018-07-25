@@ -10,12 +10,12 @@ class About extends Component {
           style={{ marginTop: 80, marginBottom: 20 }}
         >
           <Col xs={12}>
-            <img src="heart.png" height="30" width="30" alt="Love" />
+            <h3 className="pink">ABOUT</h3>
           </Col>
         </Row>
         <Row
           className="text-muted"
-          style={{ marginBottom: 80, wordWrap: 'break-word' }}
+          style={{ marginBottom: 20, wordWrap: 'break-word' }}
         >
           <Col xs={1} md={3} />
           <Col xs={10} md={6}>
@@ -67,6 +67,18 @@ class About extends Component {
             </p>
           </Col>
           <Col xs={1} md={3} />
+        </Row>
+        <Row className="text-center" style={{ marginBottom: 80 }}>
+          <Col xs={12}>
+            <a href={`${process.env.PUBLIC_URL}/`}>
+              <img
+                src={`${process.env.PUBLIC_URL}/heart.png`}
+                height="20"
+                width="20"
+                alt="Love"
+              />
+            </a>
+          </Col>
         </Row>
       </Grid>
     )
