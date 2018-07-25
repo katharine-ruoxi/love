@@ -27,8 +27,8 @@ class About extends Component {
               <a href="https://en.wikipedia.org/wiki/Jean-Paul_Sartre">
                 who were you?
               </a>), your customized URL would be{' '}
-              <a href="https://fallingloves.com/#/Simone/1929/10/14">
-                https://fallingloves.com/#/Simone/1929/10/14
+              <a href="https://fallingloves.com/Simone/1929/10/14">
+                https://fallingloves.com/Simone/1929/10/14
               </a>.
             </p>
 
