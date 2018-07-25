@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <Switch>
         <Route path="/:name/:year/:month/:date" component={LoveCanvas} />
-        <Route exact path="/about" component={About} />
+        <Route exact path="/" component={About} />
         <Route
           path="/"
           render={() => (

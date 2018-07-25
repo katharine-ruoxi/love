@@ -10,7 +10,12 @@ class About extends Component {
           style={{ marginTop: 80, marginBottom: 20 }}
         >
           <Col xs={12}>
-            <h3 className="pink">ABOUT</h3>
+            <a
+              href={`${process.env.PUBLIC_URL}/home`}
+              style={{ textDecoration: 'none' }}
+            >
+              <h3 className="pink page-title">FALLING LOVES</h3>
+            </a>
           </Col>
         </Row>
         <Row
@@ -70,7 +75,7 @@ class About extends Component {
         </Row>
         <Row className="text-center" style={{ marginBottom: 80 }}>
           <Col xs={12}>
-            <a href={`${process.env.PUBLIC_URL}/`}>
+            <a href={`${process.env.PUBLIC_URL}/home`}>
               <img
                 src={`${process.env.PUBLIC_URL}/heart.png`}
                 height="20"
