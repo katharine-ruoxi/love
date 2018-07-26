@@ -51,6 +51,12 @@ class LinkGenerator extends Component {
             </a>
           </Col>
         </Row>
+        <Row className="text-center" style={{ marginBottom: 20 }}>
+          <Col xs={12} className="white">
+            Enter the following information to generate a special web page for
+            your love:
+          </Col>
+        </Row>
         <Row
           style={{ marginBottom: 20, color: 'white', wordWrap: 'break-word' }}
         >
@@ -129,7 +135,7 @@ class LinkGenerator extends Component {
         </Row>
         <Row className="text-center" style={{ marginBottom: 30 }}>
           <Col xs={12}>
-            <span className="h4 white" style={this.getLinkStyle()}>
+            <span className="white" style={this.getLinkStyle()}>
               your personal link is
             </span>
           </Col>
