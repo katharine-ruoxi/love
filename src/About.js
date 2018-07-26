@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
+import GoHeart from 'react-icons/lib/go/heart'
 
 class About extends Component {
   render() {
     return (
-      <Grid>
+      <Grid style={{ paddingLeft: 0, paddingRight: 0 }}>
         <Row
           className="text-center"
           style={{ marginTop: 80, marginBottom: 20 }}
         >
           <Col xs={12}>
             <a
-              href={`${process.env.PUBLIC_URL}/home`}
+              href={`${process.env.PUBLIC_URL}/`}
               style={{ textDecoration: 'none' }}
             >
-              <h3 className="pink page-title">FALLING LOVES</h3>
+              <h1 className="page-title white">FALLING LOVES</h1>
             </a>
           </Col>
         </Row>
         <Row
-          className="text-muted"
-          style={{ marginBottom: 20, wordWrap: 'break-word' }}
+          style={{ marginBottom: 20, color: 'white', wordWrap: 'break-word' }}
         >
           <Col xs={1} md={3} />
           <Col xs={10} md={6}>
@@ -32,9 +32,10 @@ class About extends Component {
               <a href="https://en.wikipedia.org/wiki/Jean-Paul_Sartre">
                 who were you?
               </a>), your customized URL would be{' '}
-              <a href="https://fallingloves.com/Simone/1929/10/14">
-                https://fallingloves.com/Simone/1929/10/14
-              </a>.
+              <a href={`${window.location.origin}/Simone/1929/10/14`}>
+                {`${window.location.origin}/Simone/1929/10/14`}
+              </a>{' '}
+              .
             </p>
 
             <p>
@@ -54,8 +55,8 @@ class About extends Component {
 
             <p>
               This project was inspired by{' '}
-              <a href="http://love.hackerzhou.me">http://love.hackerzhou.me</a>,
-              and you can read its background story{' '}
+              <a href="http://love.hackerzhou.me">http://love.hackerzhou.me</a>{' '}
+              , and you can read its background story{' '}
               <a href="http://hackerzhou.me/2011/11/programmers-romantic-1st-anniversary-website.html">
                 here
               </a>{' '}
@@ -63,25 +64,20 @@ class About extends Component {
               the page{' '}
               <a href="http://love.hackerzhou.me">http://love.hackerzhou.me</a>{' '}
               is not available any more, but you can still obtain{' '}
-              <a href="https://github.com/hackerzhou/Love">its source code</a>.
+              <a href="https://github.com/hackerzhou/Love">its source code</a> .
             </p>
 
             <p>
               The source code for this website is on{' '}
-              <a href="https://github.com/stevenliuyi/love">Github</a>.
+              <a href="https://github.com/stevenliuyi/love">Github</a> .
             </p>
           </Col>
           <Col xs={1} md={3} />
         </Row>
         <Row className="text-center" style={{ marginBottom: 80 }}>
           <Col xs={12}>
-            <a href={`${process.env.PUBLIC_URL}/home`}>
-              <img
-                src={`${process.env.PUBLIC_URL}/heart.png`}
-                height="20"
-                width="20"
-                alt="Love"
-              />
+            <a href={`${process.env.PUBLIC_URL}/`}>
+              <GoHeart size={30} color="white" style={{ marginRight: 5 }} />
             </a>
           </Col>
         </Row>

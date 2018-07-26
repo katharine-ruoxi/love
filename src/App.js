@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LoveCanvas from './LoveCanvas'
 import About from './About'
+import LinkGenerator from './LinkGenerator'
 import './App.css'
 import { Switch, Route } from 'react-router-dom'
 import ReactGA from 'react-ga'
@@ -18,7 +19,16 @@ class App extends Component {
     return (
       <Switch>
         <Route path="/:name/:year/:month/:date" component={LoveCanvas} />
-        <Route exact path="/" component={About} />
+        <Route
+          exact
+          path="/"
+          render={() => <LoveCanvas overlayComponent={<LinkGenerator />} />}
+        />
+        <Route
+          exact
+          path="/about"
+          render={() => <LoveCanvas overlayComponent={<About />} />}
+        />
         <Route
           path="/"
           render={() => (

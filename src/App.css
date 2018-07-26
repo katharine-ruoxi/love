@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -35,14 +31,24 @@
   padding: 0;
 }
 
-a {
-  color: #E35B81 !important;
-}
-
-.pink {
-  color: #E35B81 !important;
+.white {
+  color: white !important;
 }
 
 .page-title {
   font-family: "Exo 2", sans-serif !important;
+}
+
+p a {
+  color: #B8204A !important;
+}
+
+.padding-2 {
+  padding: 2px !important;
+}
+
+.form-control:focus {
+  border-color: rgba(227,91,129,1.0) !important;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.075) inset, 0 0 8px rgba(227,91,129,0.6) !important;
+  outline: 0 none;
 }

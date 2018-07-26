@@ -27,6 +27,7 @@ var Canvas = {
   beatMaxScale: 1.1,
   ellipsisOffset: 0, // to make sure one dot of the ellipsis is shown at first
   textsShown: false, // if all texts on the canvas are visible
+  backgroundOnly: false,
   update: function() {
     var now = Date.now()
     var elapsed = now - this.then
@@ -60,8 +61,10 @@ var Canvas = {
         heart.height
       )
     }
-    this.drawRedHeart()
-    this.drawText()
+    if (!this.backgroundOnly) {
+      this.drawRedHeart()
+      this.drawText()
+    }
     this.move()
   },
   drawRedHeart: function() {
@@ -227,15 +230,27 @@ var Canvas = {
     this.w = this.canvas.width
     this.h = this.canvas.height
   },
-  initialize: function(name, year, month, date) {
+  initialize: function(params) {
     this.canvas = document.getElementById('canvas')
 
     if (!this.canvas.getContext) return
 
-    this.name = name
-    this.year = parseInt(year, 10)
-    this.month = parseInt(month, 10)
-    this.date = parseInt(date, 10)
+    // only show background if some information are missing
+    if (
+      params == null ||
+      params.name == null ||
+      params.year == null ||
+      params.month == null ||
+      params.date == null
+    ) {
+      this.backgroundOnly = true
+    } else {
+      this.backgroundOnly = false
+      this.name = params.name
+      this.year = parseInt(params.year, 10)
+      this.month = parseInt(params.month, 10)
+      this.date = parseInt(params.date, 10)
+    }
 
     this.setCanvasSize()
     this.ctx = this.canvas.getContext('2d')
@@ -265,24 +280,59 @@ var Canvas = {
 
 // inspired by https://codepen.io/bferioli/pen/qEGaPp
 class LoveCanvas extends Component {
+  state = {
+    height: window.innerHeight
+  }
+
   componentDidMount() {
-    const {
-      match: {
-        params: { name, year, month, date }
-      }
-    } = this.props
+    // rerender when browser is resized
+    window.addEventListener('resize', () =>
+      this.setState({ height: window.innerHeight })
+    )
 
-    // change title
-    document.title = `To My ${name}`
+    // obtain customized parameters
+    if (this.props.match != null) {
+      const {
+        match: {
+          params: { name, year, month, date }
+        }
+      } = this.props
 
-    // set up canvas
-    Canvas.initialize(name, year, month, date)
+      // change title
+      document.title = `To My ${name}`
+
+      // set up canvas
+      Canvas.initialize({ name, year, month, date })
+    } else {
+      Canvas.initialize()
+    }
+  }
+
+  componentWillUnmount() {
+    // remove listener
+    window.removeEventListener('resize', () =>
+      this.setState({ height: window.innerHeight })
+    )
   }
 
   render() {
     return (
-      <div className="App">
-        <canvas className="canvas" id="canvas" />
+      <div style={{ overflow: 'hidden' }}>
+        <canvas
+          className="canvas"
+          id="canvas"
+          style={{ zIndex: 1, position: 'absolute' }}
+        />
+        <div
+          style={{
+            zIndex: 2,
+            position: 'relative',
+            maxHeight: window.innerHeight,
+            overflowY: 'scroll'
+          }}
+        >
+          {this.props.overlayComponent}
+        </div>
       </div>
     )
   }
