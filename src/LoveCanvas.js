@@ -328,7 +328,9 @@ class LoveCanvas extends Component {
             zIndex: 2,
             position: 'relative',
             maxHeight: window.innerHeight,
-            overflowY: 'scroll'
+            overflowY: 'scroll',
+            overflowX: 'hidden',
+            WebkitOverflowScrolling: 'touch'
           }}
         >
           {this.props.overlayComponent}
