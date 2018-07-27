@@ -22,7 +22,8 @@ class LinkGenerator extends Component {
     name: '',
     year: '',
     month: 1,
-    day: 1
+    day: 1,
+    daysInMonth: 31
   }
 
   getLink() {
@@ -42,6 +43,16 @@ class LinkGenerator extends Component {
   getMessageStyle() {
     const showMessage = this.state.name !== '' && this.state.year !== ''
     return showMessage ? { visibility: 'visible' } : { visibility: 'hidden' }
+  }
+
+  getDaysInMonth() {
+    const daysInMonth = moment(
+      `${this.state.year
+        .toString()
+        .padStart(4, '0')}-${this.state.month.toString().padStart(2, '0')}`,
+      'YYYY-MM'
+    ).daysInMonth()
+    return daysInMonth > 0 ? daysInMonth : moment().daysInMonth()
   }
 
   checkInput(returnMessage = false) {
@@ -148,7 +159,7 @@ class LinkGenerator extends Component {
                           value={this.state.day}
                           onChange={e => this.setState({ day: e.target.value })}
                         >
-                          {Array(31)
+                          {Array(this.getDaysInMonth())
                             .fill()
                             .map((_, i) => (
                               <option value={i + 1} key={`day-${i + 1}`}>
