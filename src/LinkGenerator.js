@@ -161,7 +161,7 @@ class LinkGenerator extends Component {
           <Col xs={12}>
             <a href={`${process.env.PUBLIC_URL}/home`}>
               <OverlayTrigger
-                placement="bottom"
+                placement="top"
                 overlay={<Tooltip id="demo">Demo</Tooltip>}
               >
                 <GoHeart size={30} color="white" style={{ marginRight: 5 }} />
@@ -169,7 +169,7 @@ class LinkGenerator extends Component {
             </a>
             <a href={`${process.env.PUBLIC_URL}/about`}>
               <OverlayTrigger
-                placement="bottom"
+                placement="top"
                 overlay={<Tooltip id="about">About</Tooltip>}
               >
                 <GoInfo size={30} color="white" />
@@ -177,7 +177,7 @@ class LinkGenerator extends Component {
             </a>
             <a href="https://github.com/stevenliuyi/love">
               <OverlayTrigger
-                placement="bottom"
+                placement="top"
                 overlay={<Tooltip id="github">Github</Tooltip>}
               >
                 <GoMarkGithub
