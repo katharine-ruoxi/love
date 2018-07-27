@@ -15,6 +15,7 @@ import GoMarkGithub from 'react-icons/lib/go/mark-github'
 import GoInfo from 'react-icons/lib/go/info'
 import GoClippy from 'react-icons/lib/go/clippy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import moment from 'moment'
 
 class LinkGenerator extends Component {
   state = {
@@ -25,14 +26,44 @@ class LinkGenerator extends Component {
   }
 
   getLink() {
-    return `${window.location.origin}/${this.state.name}/${this.state.year}/${
-      this.state.month
-    }/${this.state.day}`
+    return encodeURI(
+      `${window.location.origin}/${this.state.name}/${this.state.year}/${
+        this.state.month
+      }/${this.state.day}`
+    )
   }
 
   getLinkStyle() {
-    const showLink = this.state.name !== '' && this.state.year !== ''
+    const showLink =
+      this.state.name !== '' && this.state.year !== '' && this.checkInput()
     return showLink ? { visibility: 'visible' } : { visibility: 'hidden' }
+  }
+
+  getMessageStyle() {
+    const showMessage = this.state.name !== '' && this.state.year !== ''
+    return showMessage ? { visibility: 'visible' } : { visibility: 'hidden' }
+  }
+
+  checkInput(returnMessage = false) {
+    const date = moment(
+      `${this.state.year
+        .toString()
+        .padStart(4, '0')}-${this.state.month
+        .toString()
+        .padStart(2, '0')}-${this.state.day.toString().padStart(2, '0')}`,
+      'YYYY-MM-DD',
+      true
+    )
+
+    if (!date.isValid()) {
+      return returnMessage ? 'Oops! The date you entered is invalid.' : false
+    } else if (date.diff(moment(), 'days') > 0) {
+      return returnMessage
+        ? 'Oops! The date you entered is in the future.'
+        : false
+    } else {
+      return returnMessage ? 'Your personal link is' : true
+    }
   }
 
   render() {
@@ -135,8 +166,8 @@ class LinkGenerator extends Component {
         </Row>
         <Row className="text-center" style={{ marginBottom: 30 }}>
           <Col xs={12}>
-            <span className="white" style={this.getLinkStyle()}>
-              your personal link is
+            <span className="white" style={this.getMessageStyle()}>
+              {this.checkInput(true)}
             </span>
           </Col>
           <Col xs={12} style={this.getLinkStyle()}>
