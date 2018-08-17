@@ -25,7 +25,7 @@ class About extends Component {
           <Col xs={1} md={3} />
           <Col xs={10} md={6}>
             <p>
-              This website was initially created for my girlfriend, but now I've
+              This website was initially created for the girl I like, but now I've
               made it customizable so that you can share it with your own love.
               For instance, if the name of your love were Simone, and the day
               you fell in love with her were October 14, 1929 (Guess{' '}
